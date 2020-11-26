@@ -12,15 +12,23 @@
             >
             </v-img>
             <v-card-title class="text-center"
-              >Pokemon - 
+              >Pokemon # 
               <template>
-                <v-text-field v-model="number" @keyup.enter="search"></v-text-field>
+                <v-text-field
+                  v-model="number"
+                  @keyup.enter="search"
+                  color="warning"
+                  loading
+                ></v-text-field>
                 <v-btn @click="search" block color="secondary">Search</v-btn>
               </template>
             </v-card-title>
             <v-divider class="mx-4"></v-divider>
-            <v-card-text>
-              {{number}}
+            <!-- <v-card-text v-for="pokemon in pokemonName" v-bind:key="pokemon.id">
+              {{pokemon}}
+            </v-card-text> -->
+            <v-card-text class="text-center headline">
+              {{ pokemonName }}
             </v-card-text>
           </v-card>
         </v-col>
@@ -36,20 +44,22 @@ export default {
   data() {
     return {
       number: null,
-      pokemonName: [],
+      pokemonName: "",
     };
   },
   methods: {
     async getPokemon(num) {
       try {
-        let data = await axios.get(`https://pokeapi.co/api/v2/pokemon/`);
-        console.log(data.data.results[num]);
+        // let res = await axios.get(`https://pokeapi.co/api/v2/pokemon/`);
+        let res = await axios.get(`https://pokeapi.co/api/v2/pokemon/?offset=0&limit=151`);
+        // console.log(res.data.results[num].name);
+        this.pokemonName = res.data.results[num].name;
       } catch (error) {
         console.log(error);
       }
     },
     search() {
-      console.log(this.getPokemon(this.number));
+      this.getPokemon(this.number);
     },
   },
 };
