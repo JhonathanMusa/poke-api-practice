@@ -1,4 +1,4 @@
-# poke-api-practice
+# poke-api-vue-practice
 
 ## Project setup
 ```
