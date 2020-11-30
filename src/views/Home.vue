@@ -27,7 +27,7 @@
             <!-- <v-card-text v-for="pokemon in pokemonName" v-bind:key="pokemon.id">
               {{pokemon}}
             </v-card-text> -->
-            <v-card-text class="text-center headline">
+            <v-card-text class="text-center headline" style="color: #f00">
               {{ pokemonName }}
             </v-card-text>
           </v-card>
