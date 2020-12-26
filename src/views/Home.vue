@@ -20,7 +20,7 @@
                   color="warning"
                   loading
                 ></v-text-field>
-                <v-btn @click="search" block color="secondary">Search</v-btn>
+                <v-btn @click="search" block color="success">Search</v-btn>
               </template>
             </v-card-title>
             <v-divider class="mx-4"></v-divider>
@@ -29,11 +29,9 @@
             </v-card-text> -->
             <v-card-text
               class="text-center headline"
-              style="color: #f00"
-              v-for="(pokemon, index) in pokemons"
-              v-bind:key="index"
-            >
-              {{ pokemon.name }}
+              style="color: #f00">
+        
+              {{ pokemonName }}
             </v-card-text>
           </v-card>
         </v-col>
@@ -50,7 +48,6 @@ export default {
     return {
       number: null,
       pokemonName: "",
-      pokemons: [],
     };
   },
   methods: {
@@ -58,12 +55,10 @@ export default {
       try {
         // let res = await axios.get(`https://pokeapi.co/api/v2/pokemon/`);
         let res = await axios.get(
-          `https://pokeapi.co/api/v2/pokemon/?offset=0&limit=151`
+          `https://pokeapi.co/api/v2/pokemon/?offset=0&limit=999`
         );
-        // console.log(res.data.results[num].name);
-        // this.pokemons = res.data.results[num].name;
         console.log(res.data.results[num].name);
-        this.pokemons.push(res.data.results[num].name);
+        this.pokemonName = res.data.results[num].name;
       } catch (error) {
         console.log(error);
       }
