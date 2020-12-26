@@ -12,7 +12,7 @@
             >
             </v-img>
             <v-card-title class="text-center"
-              >Pokemon # 
+              >Pokemon #
               <template>
                 <v-text-field
                   v-model="number"
@@ -27,8 +27,13 @@
             <!-- <v-card-text v-for="pokemon in pokemonName" v-bind:key="pokemon.id">
               {{pokemon}}
             </v-card-text> -->
-            <v-card-text class="text-center headline" style="color: #f00">
-              {{ pokemonName }}
+            <v-card-text
+              class="text-center headline"
+              style="color: #f00"
+              v-for="(pokemon, index) in pokemons"
+              v-bind:key="index"
+            >
+              {{ pokemon.name }}
             </v-card-text>
           </v-card>
         </v-col>
@@ -45,15 +50,20 @@ export default {
     return {
       number: null,
       pokemonName: "",
+      pokemons: [],
     };
   },
   methods: {
     async getPokemon(num) {
       try {
         // let res = await axios.get(`https://pokeapi.co/api/v2/pokemon/`);
-        let res = await axios.get(`https://pokeapi.co/api/v2/pokemon/?offset=0&limit=151`);
+        let res = await axios.get(
+          `https://pokeapi.co/api/v2/pokemon/?offset=0&limit=151`
+        );
         // console.log(res.data.results[num].name);
-        this.pokemonName = res.data.results[num].name;
+        // this.pokemons = res.data.results[num].name;
+        console.log(res.data.results[num].name);
+        this.pokemons.push(res.data.results[num].name);
       } catch (error) {
         console.log(error);
       }
